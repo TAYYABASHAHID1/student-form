@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+        }
+
+        #table {
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 18px;
+            text-align: left;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 15px;
+        }
+
+        table th {
+            background-color: #002A32;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #002A32;
+        }
+
+        table tr:nth-child(odd) {
+            background-color: #EBA6A9;
+        }
+
+        table tr:hover {
+            background-color: #00BCD4;
+            color: white;
+        }
+
+        table tr {
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        table td {
+            color: #212529;
+        }
+
+        table tr:hover td {
+            color: white;
+        }
+
+        input[type="submit"] {
+            background-color: #002A32;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .outer {
+            background-color: #ffffff;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            max-width: 500px;
+            margin: 20px auto;
+        }
+
+        .outer h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #343a40;
+        }
+
+        .outer p {
+            font-size: 16px;
+            color: #6c757d;
+        }
+
+        .outer input.in {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .outer input.in:focus {
+            border-color: #a5f9ff;
+            outline: none;
+        }
+    </style> -->
+</head>
+<body>
+    <div >
+        <button id="btn">Add Student</button>
+        <div id="container" ></div>
+    </div>
+    <div id="table"> 
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Father Name</th>
+                    <th>Phone Number</th>
+                    <th>Date of Birth</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <script>
+        var mainBtn = document.querySelector("#btn");
+        mainBtn.addEventListener("click", function() {
+            var div = document.getElementById("container");
+            div.innerHTML = `
+            <div class="outer">
+                <h1>Information</h1>
+                <p>Enter Name</p>
+                <input class="in" type="text" placeholder="Enter Name" id="name"/>
+                <p>Enter Father Name</p>
+                <input class="in" type="text" placeholder="Enter Father Name" id="fatherName"/>
+                <p>Enter Phone Number</p>
+                <input class="in" type="tel" placeholder="Enter Phone Number" id="phoneNumber"/>
+                <p>Enter Date of Birth</p>
+                <input class="in" type="date" placeholder="Enter Date of Birth" id="dob"/>
+                <input type="submit" value="Submit" onclick="aster()" id="bt" />
+            </div>
+            `;
+        });
+
+        function aster() {
+            var name = document.getElementById("name").value
+            var fatherName = document.getElementById("fatherName").value;
+            var phoneNumber = document.getElementById("phoneNumber").value;
+            var dob = document.getElementById("dob").value;
+
+          
+
+            var formDiv = document.getElementById("container");
+            formDiv.innerHTML = "";
+
+            var addBtn = document.getElementById("btn");
+            addBtn.classList.add("after");
+
+            var table = document.querySelector("table tbody");
+            var row = table.insertRow();
+            row.innerHTML = `
+                <td>${name}</td>
+                <td>${fatherName}</td>
+                <td>${phoneNumber}</td>
+                <td>${dob}</td>
+            `;
+        }
+
+        function moveButtonRandomly() {
+            var bt = document.getElementById("bt");
+            var outer = document.querySelector('.outer');
+            var outerRect = outer.getBoundingClientRect();
+            var maxX = Math.min(outerRect.right + 100, window.innerWidth - bt.offsetWidth);
+            var maxY = Math.min(outerRect.bottom + 100, window.innerHeight - bt.offsetHeight);
+            var minX = Math.max(outerRect.left - 100, 0);
+            var minY = Math.max(outerRect.top - 100, 0);
+            var randomX = Math.floor(Math.random() * (maxX - minX + 1)) + minX;
+            var randomY = Math.floor(Math.random() * (maxY - minY + 1)) + minY;
+            bt.style.left = randomX + "px";
+            bt.style.top = randomY + "px";
+        }
+    </script>
+</body>
+</html>
